@@ -1,4 +1,5 @@
-import { method } from "lodash"
+import _ from 'lodash';
+
 
 const backendDomain="http://localhost:8080"
 
