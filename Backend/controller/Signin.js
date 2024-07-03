@@ -1,4 +1,4 @@
-const bcrypt=require('bcryptjs')
+const bcrypt=require('bcrypt')
 const usermodel =require( "../models/usermodel")
 const jwt=require('jsonwebtoken');
 async function Signin(req,res){
