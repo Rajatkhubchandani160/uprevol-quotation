@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 
-const backendDomain="uprevol-quotation-backend-jht91t201.vercel.app"
+const  backendDomain="http://localhost:8080"
 
 const SummaryApi={
     signup:{
