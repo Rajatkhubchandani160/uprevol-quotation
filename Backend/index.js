@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 const app=express();
-app.use(cors({origin:process.env.FRONTEND_URL,credentials:true}))
+app.use(cors({origin:"https://uprevol-quotation-frontend.vercel.app",credentials:true}))
 app.use(cookieParser())
 app.use(express.json())
 app.use('/api',router)
