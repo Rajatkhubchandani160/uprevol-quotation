@@ -2,7 +2,7 @@
 
 A comprehensive web application for browsing and purchasing electronic products, built using the MERN stack.
 
-![Homepage Screenshot](C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 112752.png)
+![Homepage Screenshot](Frontend/src/assets/Screenshots/Screenshot%202024-07-20%20121845.png)
 
 ## Table of Contents
 - [Description](#description)
@@ -81,13 +81,25 @@ After completing the installation steps, open your browser and navigate to http:
 - Database: MongoDB
 - Authentication: JWT (JSON Web Tokens)
 
+## Screenshots
 
-![Homepage Screenshot]("C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 113401.png")
-![Admin Panel Screenshot](C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 115524.png)
-![Product Details Screenshot](C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 113642.png)
-![Shopping Cart Screenshot](C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 113718.png)
-![User Authentication Screenshot](C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 112907.png)
-![Product Listing Screenshot](C:\Users\DELL\Pictures\Screenshots\Screenshot 2024-07-20 113501.png)
+### Homepage
+![Homepage Screenshot](Frontend/src/assets/Screenshots/Screenshot%202024-07-20%20121845.png)
+
+### Admin Panel
+![Admin Panel Screenshot](Frontend/src/assets/Screenshots/Screenshot%202024-07-20%20122003.png)
+
+
+
+### Shopping Cart
+![Shopping Cart Screenshot](Frontend/src/assets/Screenshots/Screenshot%202024-07-20%20121943.png)
+
+### User Authentication
+![User Authentication Screenshot](Frontend/src/assets/Screenshots/Screenshot%202024-07-20%20122027.png)
+
+### Product Listing
+![Product Listing Screenshot](Frontend/src/assets/Screenshots/Screenshot%202024-07-20%20121924.png)
+
 
 # Contributing
 - Contributions are welcome! Please follow these steps to contribute:
