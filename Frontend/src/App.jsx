@@ -9,6 +9,7 @@ import Footer from './Components/Footer'
 import SummaryApi from './common';
 import { useDispatch } from 'react-redux';
 import { setuserdetails } from './Store/userslice'; 
+import SaleStrip from './Components/Salestrip';
 const App = () => {
   const dispatch=useDispatch()
   const [cartproductcount, setcartproductcount] = useState(0)
@@ -44,7 +45,7 @@ const App = () => {
       fetchCartDetails
     }}>
     <ToastContainer position='top-center' />
-    
+    <SaleStrip/>
     <Header/>
     <main className='min-h-[calc(100vh-120px)] pt-16'>
     <Outlet/>
