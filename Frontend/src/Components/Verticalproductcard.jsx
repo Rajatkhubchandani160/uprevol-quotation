@@ -36,7 +36,7 @@ const Verticalproductcard = ({ category, heading }) => {
       <Link to='#' className='text-2xl hover:border-b-2 hover:border-black transition-all max-w-fit font-semibold'>
         {heading}
       </Link>
-      <div className='flex flex-wrap items-center gap-5 mt-6'>
+      <div className='flex flex-wrap items-center gap-5 mt-6 md:justify-between '>
         {loading
           ? LoadingList.map((_, index) => (
               <div
@@ -62,7 +62,7 @@ const Verticalproductcard = ({ category, heading }) => {
               >
                 <Link
                   to={`/product/${product._id}`}
-                  className='block bg-slate-200 p-2 rounded-t-xl h-48 flex justify-center'
+                  className=' bg-slate-200 p-2 rounded-t-xl h-48 flex justify-center'
                 >
                   <img
                     src={product.productImage[0]}

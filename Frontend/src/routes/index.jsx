@@ -17,6 +17,12 @@ import Viewcart from "../pages/Viewcart";
 import Search from "../pages/Search";
 import Enquerycart from "../pages/Enquerycart";
 import Enqueryfrom from "../Components/Enqueryfrom";
+import Homeadmin from "../pages/Homeadmin";
+import SaleForm from "../pages/Sale";
+import Sale from "../pages/Sale";
+import Serviceadmin from "../pages/Serviceadmin";
+import Contactadmin from "../pages/Contactadmin";
+
 const router=createBrowserRouter([
     {
         path:"/",
@@ -81,7 +87,23 @@ const router=createBrowserRouter([
                     {
                         path:'all-products',
                         element:<Allproducts/>
-                    }
+                    },
+                    {
+                        path:'edit-home',
+                        element:<Homeadmin/>
+                    },
+                    {
+                        path:'edit-sale',
+                        element:<Sale/>  
+                     },
+                     {
+                        path:'edit-service',
+                        element:<Serviceadmin/>  
+                     },
+                     {
+                        path:'edit-contact',
+                        element:<Contactadmin/>
+                     }
                 ]
             },
             {

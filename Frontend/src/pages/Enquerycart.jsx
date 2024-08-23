@@ -3,12 +3,12 @@ import SummaryApi from '../common';
 import generalContext from '../context/index';
 import currency from '../helper/DisplayINRcurrency';
 import { IoClose } from "react-icons/io5";
-import { useSelector } from 'react-redux';
 import Enqueryfrom from '../Components/Enqueryfrom';
 
 const Enquerycart = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showEnquiryForm, setShowEnquiryForm] = useState(true); // State to show/hide the enquiry form
   const context = useContext(generalContext);
   const [cartCount, setCartCount] = useState(context.cartproductcount);
 
@@ -106,8 +106,8 @@ const Enquerycart = () => {
                 </div>
               ))
             : data.map((product, index) => (
-                <div key={product._id} className='bg-slate-300 lg:w-full h-32 rounded-xl mx-5 mb-1 flex'>
-                  <div className='w-44 py-2 h-full border-black border-2 rounded-l-xl'>
+                <div key={product._id} className='bg-slate-100 shadow-md lg:w-full h-32 rounded-xl mx-5 mb-1 flex'>
+                  <div className='w-44 py-2 h-full border-black border-2 rounded-lg'>
                     <img
                       src={product?.productId?.productImage[0]}
                       className='w-full h-full object-scale-down rounded-xl mix-blend-multiply'
@@ -158,10 +158,15 @@ const Enquerycart = () => {
                 <p className='font-serif font-bold text-xl'>Total Price :</p>
                 <p className='font-mono font-semibold text-red-600 text-xl'>{currency(totalAmount)}</p>
               </div>
-              <button className='bg-blue-600 w-full p-3 text-white flex items-center justify-center rounded-b-xl'>Payment</button>
+              <button
+                className='w-full bg-red-600 p-3 text-white flex capitalize text-xl items-center justify-center rounded-b-xl'
+                onClick={() => setShowEnquiryForm(!showEnquiryForm)} // Toggle the form visibility
+              >
+                {showEnquiryForm ? 'Hide Quote Form' : 'Send Quote'}
+              </button>
             </div>
           )}
-          <Enqueryfrom cartItems={data} cartcount={cartCount} resetCart={resetCart} />
+          {showEnquiryForm && <Enqueryfrom cartItems={data} cartcount={cartCount} resetCart={resetCart} onClose={() => setShowEnquiryForm(false)} />}
         </div>
       </div>
     </div>

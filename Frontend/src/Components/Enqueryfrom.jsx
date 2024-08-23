@@ -105,7 +105,7 @@ const Enqueryfrom = ({ cartItems, cartcount, resetCart }) => {
           className="w-full p-2 border rounded"
         />
       </div>
-      <button  type="submit" className="w-full p-2 bg-blue-600 hover:bg-blue-700 text-white rounded">
+      <button  type="submit" className="w-full p-2 bg-red-600 hover:bg-red-700 text-white rounded">
         Submit Enquiry
       </button>
     </form> 

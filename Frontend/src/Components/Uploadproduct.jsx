@@ -8,7 +8,7 @@ import { MdDelete } from "react-icons/md";
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
 
-const Uploadproduct = ({ onclose , fetchdata}) => {
+const Uploadproduct = ({ onclose, fetchdata }) => {
   const [data, setdata] = useState({
     productName: "",
     brandName: "",
@@ -81,14 +81,18 @@ const Uploadproduct = ({ onclose , fetchdata}) => {
   };
 
   return (
-    <div className='fixed bottom-0 top-0 left-0 right-0  flex justify-center items-center'>
-    {/* <div className='z-10 opacity-1 w-full h-full flex items-start justify-center'> */}
-      <div className='bg-white overflow-y-scroll mt-20 h-[70%] ml-[22%]  shadow-lg w-[45%] text-lg capitalize'>
-        <div className='text-2xl font-semibold p-3 flex bg-white border-b-2 border-black h-10 w-full items-center justify-between'>
-          <div>Upload Product Details</div>
-          <button onClick={onclose}><IoClose /></button>
+    <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+      <div className='relative w-full max-w-4xl bg-white rounded-lg shadow-lg p-6'>
+        <button
+          onClick={onclose}
+          className='absolute top-3 right-3 text-gray-500 hover:text-gray-800'
+        >
+          <IoClose size={24} />
+        </button>
+        <div className='text-2xl font-semibold mb-6 text-center'>
+          Upload Product Details
         </div>
-        <form className='grid p-3 w-full gap-1 capitalize' onSubmit={HandleSubmitButton}>
+        <form className='grid gap-4' onSubmit={HandleSubmitButton}>
           <label htmlFor="productName">Product Name :</label>
           <input required className='bg-slate-200 rounded px-2'
             type="text"
@@ -119,7 +123,7 @@ const Uploadproduct = ({ onclose , fetchdata}) => {
           <label htmlFor="uploadImageproduct">
             <div className='bg-slate-200 rounded flex flex-col justify-center items-center px-2 py-4 h-48'>
               <AiOutlineCloudUpload size={40} />
-              <p className='text-sm'>Upload product Image</p>
+              <p className='text-sm'>Upload Product Image</p>
               <input type="file" className='hidden' id="uploadImageproduct" onChange={handleUploadProduct} />
             </div>
           </label>
@@ -134,15 +138,15 @@ const Uploadproduct = ({ onclose , fetchdata}) => {
                         setFocusimage(el);
                         setopenfullscreenimage(true);
                       }}
-                      className='bg-slate-100 rounded' />
-                    <div className='absolute right-0 bottom-0 hover:text-red-600 rounded-full' onClick={() => Handledeleteproductimage(id)}>
+                      className='bg-slate-100 rounded cursor-pointer' />
+                    <div className='absolute right-0 bottom-0 hover:text-red-600 rounded-full cursor-pointer' onClick={() => Handledeleteproductimage(id)}>
                       <MdDelete />
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className='text-red-600 text-xs '>*Please upload product</p>
+              <p className='text-red-600 text-xs'>*Please upload a product image</p>
             )}
 
             <label htmlFor="price">Price :</label>
@@ -163,14 +167,13 @@ const Uploadproduct = ({ onclose , fetchdata}) => {
               value={data.selling}
               onChange={Handleproduct} />
 
-            <label htmlFor="description">
-              Product Description :</label>
+            <label htmlFor="description">Product Description :</label>
             <textarea name="description"
               onChange={Handleproduct}
               id="description"
-              placeholder='Enter Product Description' rows={3} className='mt-1  hover:bg-slate-300 bg-slate-200 p-1 px-2 rounded-lg w-full resize-none'></textarea>
+              placeholder='Enter Product Description' rows={3} className='mt-1 bg-slate-200 p-1 px-2 rounded-lg w-full resize-none'></textarea>
 
-            <button className='mt-5 hover:bg-slate-300 bg-slate-200 px-2 py-1 rounded-xl ml-56 text-center '>Upload Product</button>
+            <button className='mt-5 hover:bg-slate-300 bg-slate-200 px-4 py-2 rounded-xl'>Upload Product</button>
           </div>
         </form>
       </div>

@@ -8,7 +8,12 @@ const Categorylist = () => {
   const categoryLoading=new Array(12).fill(null)
   const fetchcategorygroup =async()=>{
     setloading(true)
-    const response =await fetch(SummaryApi.categoryProduct.url)
+    const response = await fetch(SummaryApi.categoryProduct.url, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
     const jsonresponse= await response.json()
     console.log("json",jsonresponse)
     setloading(false)
@@ -19,7 +24,7 @@ const Categorylist = () => {
   },[])
   return (
     <div className='container  mx-auto py-4 px-6 mt-1 overflow-scroll scrollbar-none'>
-     <div className='flex items-center justify-between  sm:gap-10'>
+     <div className='flex items-center justify-between gap-5 lg:gap-10'>
       {loading ?(
       categoryLoading.map((el,index)=>{
         return(

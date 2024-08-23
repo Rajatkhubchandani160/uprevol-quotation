@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -7,9 +7,11 @@ import {
   FaMapMarkerAlt,
   FaEnvelope,
   FaPhone,
+  FaWhatsapp,  // Import WhatsApp icon
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import SummaryApi from "../common";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +27,33 @@ const Contact = () => {
     phone: false,
     message: false,
   });
+
+  const [contactInfo, setContactInfo] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const response = await fetch(SummaryApi.showcontact.url, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        if (data.success) {
+          setContactInfo(data.data[0]); // Assuming API returns an array of contact info
+        }
+      } catch (err) {
+        console.error("Failed to fetch contact info:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchContactInfo();
+  }, []);
 
   const handleFocus = (field) => {
     setFocused((prev) => ({ ...prev, [field]: true }));
@@ -43,7 +72,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/feedback", {
+      const response = await fetch(SummaryApi.userfeedback.url, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -69,54 +98,79 @@ const Contact = () => {
     }
   };
 
+  
+  const getSocialIcon = (platform) => {
+    switch (platform.toLowerCase()) {
+      case "facebook":
+        return <FaFacebookF />;
+      case "twitter":
+        return <FaTwitter />;
+      case "instagram":
+        return <FaInstagram />;
+      case "linkedin":
+        return <FaLinkedinIn />;
+        case "whatsapp":
+        return <FaWhatsapp/>;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="container mx-auto min-h-screen flex items-center justify-center p-8 bg-gray-100 relative">
+    <div className="container mx-auto min-h-screen flex items-center justify-center p-8 bg-gray-100 relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-teal-400 rounded-full opacity-30 -top-20 -right-20"></div>
       <div className="relative w-full max-w-4xl bg-white rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-        <div className="p-8 bg-teal-500 relative text-white">
-          <h3 className="text-2xl font-semibold mb-4">Let's get in touch</h3>
-          <p className="mb-8">
-          At DE , we’re dedicated to providing top-quality electronics and exceptional service. Whether you have questions or need a quote, our team is here to help. Contact us using the form below or reach out directly. We look forward to serving you!
-          </p>
-          <div className="mb-8">
-            <div className="flex items-center mb-4">
-              <FaMapMarkerAlt className="mr-4" />
-              <Link to="#" target="_blank" rel="noopener noreferrer" className="text-white">
-                92 Cherry Drive Uniondale, NY 11553
-              </Link>
-            </div>
-            <div className="flex items-center mb-4">
-              <FaEnvelope className="mr-4" />
-              <a href="mailto:lorem@ipsum.com" className="text-white">
-                lorem@ipsum.com
-              </a>
-            </div>
-            <div className="flex items-center mb-4">
-              <FaPhone className="mr-4" />
-              <a href="tel:7378162336" className="text-white">
-                +91-7378162336
-              </a>
-            </div>
-          </div>
-          <div>
-            <p className="mb-2">Connect with us:</p>
-            <div className="flex space-x-3">
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-teal-600 text-white">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-teal-600 text-white">
-                <FaTwitter />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-teal-600 text-white">
-                <FaInstagram />
-              </a>
-              <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full bg-teal-600 text-white">
-                <FaLinkedinIn />
-              </a>
-            </div>
-          </div>
+        <div className="p-8 bg-teal-500 text-white flex flex-col justify-between">
+          <h3 className="text-2xl font-semibold mb-4">
+            {contactInfo ? contactInfo.title : "Let's get in touch"}
+          </h3>
+          {isLoading ? (
+            <p>Loading contact information...</p>
+          ) : contactInfo ? (
+            <>
+              <p className="mb-8">{contactInfo.description}</p>
+              <div className="mb-8">
+                <div className="flex items-center mb-4">
+                  <FaMapMarkerAlt className="mr-4" />
+                  <Link to="#" target="_blank" rel="noopener noreferrer" className="text-white">
+                    {contactInfo.address}
+                  </Link>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaEnvelope className="mr-4" />
+                  <a href={`mailto:${contactInfo.email}`} className="text-white">
+                    {contactInfo.email}
+                  </a>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaPhone className="mr-4" />
+                  <a href={`tel:${contactInfo.phone}`} className="text-white">
+                    {contactInfo.phone}
+                  </a>
+                </div>
+              </div>
+              <div>
+                <p className="mb-2">Connect with us:</p>
+                <div className="flex space-x-3">
+                  {contactInfo.socialLinks?.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.url}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-teal-600 text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {getSocialIcon(link.platform)}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : (
+            <p>No contact information available.</p>
+          )}
         </div>
-        <div className="p-8">
+        <div className="p-8 flex flex-col justify-center">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">Contact us</h3>
           <form className="space-y-4" onSubmit={handleSubmit}>
             {["name", "email", "phone", "message"].map((field) => (

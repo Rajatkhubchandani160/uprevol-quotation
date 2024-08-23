@@ -199,7 +199,7 @@ const Viewcart = () => {
                 <p className='font-mono  font-semibold text-red-600  text-xl'>{currency(totalAmount)}</p>
 
               </div>
-              <Link to={"/Enquery-cart"}  className='bg-blue-600 w-full p-3 text-white flex items-center justify-center rounded-b-xl'>Payment</Link>
+              <Link to={"/Enquery-cart"}  className='bg-red-600 w-full p-3 text-white flex items-center justify-center rounded-b-xl'>Send Quote</Link>
             </div>
           )}
         </div>  

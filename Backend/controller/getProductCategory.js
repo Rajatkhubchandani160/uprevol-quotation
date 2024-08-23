@@ -1,4 +1,3 @@
-const { error } = require("console")
 const productmodel = require("../models/productmodel")
 
 const getProductCategory =async(req,res)=>{

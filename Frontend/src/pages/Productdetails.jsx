@@ -53,7 +53,7 @@ const Productdetails = () => {
   return (
     <div className="py-5 px-10 container">
       <div className="flex-col gap-10 flex h-full">
-        <div className="h-full w-full">
+        <div className="h-full w-full flex flex-col lg:flex-row gap-7">
           {loading ? (
             <div className="flex gap-7 h-full w-full">
               <div className="flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full">
@@ -89,13 +89,13 @@ const Productdetails = () => {
               </div>
             </div>
           ) : (
-            <div className="flex gap-7 h-full w-full">
+            <div className="lg:flex lg:flex-row flex-col gap-7 h-full w-full">
               <div className="flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full">
                 {productdata.productImage.map((image, index) => (
                   <div key={index} className="lg:w-32 w-24 h-24 lg:h-32 rounded-xl">
                     <img
                       className="rounded-xl h-full w-full border-black border-[0.5px] transition-all shadow-md hover:scale-105 hover:border-none 
-                        hover:rounded-none mix-blend-multiply object-scale-down"
+                        hover:rounded-none mix-blend-multiply lg:object-scale-down"
                       onMouseEnter={() => setActiveImage(image)}
                       src={image}
                       alt={image}
@@ -103,18 +103,19 @@ const Productdetails = () => {
                   </div>
                 ))}
               </div>
-              <div className="lg:w-[26vw] lg:h-[57vh] h-[250px] w-[250px] bg-slate-200 transition-all rounded-xl">
+              <div className="lg:w-[26vw] lg:h-[57vh] h-[250px] lg:mt-0 mt-4 w-[300px] bg-slate-200 transition-all rounded-xl">
                 <img
-                  className="rounded-xl h-full w-full shadow-md mix-blend-multiply object-scale-down"
+                  className="rounded-xl h-full w-full shadow-md mix-blend-multiply
+                  lg:object-scale-down"
                   src={ActiveImage}
                   alt={ActiveImage}
                 />
               </div>
-              <div className="flex-col capitalize flex gap-2">
-                <h4 className="bg-slate-200 px-3 text-gray-500 rounded-full w-fit">
+              <div className="flex-col capitalize flex gap-2 lg:gap-6">
+                <h4 className="bg-slate-200 lg:mt-0 mt-3 px-3 text-gray-500 rounded-full w-fit">
                   {productdata?.brandName}
                 </h4>
-                <h2 className="text-5xl font-bold">
+                <h2 className="text-3xl lg:text-5xl font-bold">
                   {productdata?.productName}
                 </h2>
                 <h4 className="text-gray-500 font-semibold">
@@ -127,7 +128,7 @@ const Productdetails = () => {
                   <FaStar />
                   <FaStarHalfStroke />
                 </div>
-                <div className="flex gap-3 text-2xl">
+                <div className="flex gap-3 text-xl lg:text-2xl">
                   <p className="text-red-600">
                     {currency(productdata?.selling)}
                   </p>
@@ -136,17 +137,17 @@ const Productdetails = () => {
                   </p>
                 </div>
                 <div className="flex gap-3">
-                  <button className="border-2 border-red-600 px-5 py-1 capitalize rounded-md hover:bg-red-600 hover:text-black">
+                  <button className="border-2 border-red-600 px-5 py-2 capitalize rounded-md hover:bg-red-600 hover:text-black">
                     Buy Button
                   </button>
                   <button
-                    className="border-2 border-red-600 px-5 py-1 capitalize rounded-md hover:bg-red-600 hover:text-black"
+                    className="border-2 border-red-600 px-5 py-2 capitalize rounded-md hover:bg-red-600 hover:text-black"
                     onClick={(e) => handleAddToCart(e, productdata?._id)}
                   >
                     Add To Cart
                   </button>
                 </div>
-                <div className="flex-col w-72">
+                <div className="flex-col w-full lg:w-72">
                   <p className="text-black font-semibold">Description :</p>
                   <p className="h-fit font-medium text-zinc-500 w-full text-start px-1">
                     {productdata?.description}
@@ -156,12 +157,10 @@ const Productdetails = () => {
             </div>
           )}
         </div>
-        <div>
-          <div className="h-full w-full py-5">
-            {productdata.category && (
-              <Displayrelevantproduct category={productdata?.category} heading={"Recommended products"} />
-            )}
-          </div>
+        <div className="py-5">
+          {productdata.category && (
+            <Displayrelevantproduct category={productdata?.category} heading={"Recommended products"} />
+          )}
         </div>
       </div>
     </div>
